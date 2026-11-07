@@ -168,8 +168,51 @@ h1 {
 }
 
 
-/* ---------- Admission list ---------- */
-.admission-steps li { margin: 0.5rem 0; }
+/* ---------- Admission list (styled as a vertical flow) ---------- */
+.admission-steps {
+  list-style: none;            /* hide the default bullets... */
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+}
+.admission-steps li {
+  position: relative;          /* ...so we can draw our own */
+  padding: 0 0 1.5rem 2.25rem;
+  line-height: 24px;
+  font-weight: 500;
+}
+.admission-steps li:last-child { padding-bottom: 0; }
+
+/* the dot (custom bullet) */
+.admission-steps li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 3px solid var(--nus-blue);
+  background: #fff;
+  transition: background 0.15s, border-color 0.15s;
+}
+.admission-steps li:hover::after {
+  background: var(--nus-orange);
+  border-color: var(--nus-orange);
+}
+
+/* the line connecting one dot to the next */
+.admission-steps li::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 20px;
+  bottom: -4px;
+  width: 2px;
+  background: #d6dee8;
+}
+.admission-steps li:last-child::before { display: none; }
+
 
 /* ---------- Small screens: sidebar becomes a top bar ---------- */
 @media (max-width: 768px) {
