@@ -106,20 +106,67 @@ h1 {
 .home-logo { width: 280px; max-width: 80%; margin-bottom: 1.5rem; }
 .home-tagline { font-size: 1.5rem; font-weight: 500; color: var(--nus-blue); }
 
-/* ---------- Academics table ---------- */
-.module-table {
-  width: 100%;
-  border-collapse: collapse;
+/* ---------- Page header (shared by Academics & Admission) ---------- */
+.page-header { margin-bottom: 1.75rem; }
+.page-header h1 { margin-bottom: 0.25rem; }
+.page-subtitle { margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+/* ---------- Card (white panel, reusable) ---------- */
+.card {
   background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;            /* keeps the table inside the rounded corners */
 }
-.module-table th,
-.module-table td { padding: 0.75rem 1rem; text-align: left; }
-.module-table th { background: var(--nus-blue); color: #fff; font-weight: 600; }
-.module-table tbody tr:nth-child(even) { background: #f1f4f8; }
-.module-table td:first-child { font-weight: 600; color: var(--nus-blue); }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e6eaf0;
+}
+.card-header h2 { margin: 0; font-size: 1.1rem; color: var(--nus-blue); }
+.card-count {
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: #eef2f7;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;        /* pill shape */
+}
+
+/* ---------- Academics table ---------- */
+.module-table { width: 100%; border-collapse: collapse; }
+.module-table th {
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: #f8fafc;
+  border-bottom: 1px solid #e6eaf0;
+}
+.module-table td {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid #eef1f5;
+}
+.module-table td:first-child { width: 160px; }
+.module-table tbody tr:last-child td { border-bottom: 0; }
+.module-table tbody tr { transition: background 0.15s; }
+.module-table tbody tr:hover { background: #f5f8fc; }
+
+.module-code {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(0, 61, 124, 0.08);   /* NUS blue, very light */
+  color: var(--nus-blue);
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 
 /* ---------- Admission list ---------- */
 .admission-steps li { margin: 0.5rem 0; }
