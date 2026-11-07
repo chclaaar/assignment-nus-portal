@@ -1,4 +1,6 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, logout } from "../firebase";
 
 function Icon({ children }) {
   return (
@@ -13,6 +15,13 @@ function Icon({ children }) {
 }
 
 export default function NavBar() {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
   return (
     <aside className="sidebar">
       <NavLink to="/" className="sidebar-brand">
@@ -40,6 +49,34 @@ export default function NavBar() {
           <span>Admission</span>
         </NavLink>
       </nav>
+      
+      <div className="sidebar-account">
+        {user ? (
+          <>
+            <p className="sidebar-user">
+              Signed in as
+              <strong title={user.email}>{user.displayName || user.email}</strong>
+            </p>
+            <button type="button" className="sidebar-link" onClick={handleLogout}>
+              <Icon>
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </Icon>
+              <span>Log out</span>
+            </button>
+          </>
+        ) : (
+          <NavLink to="/login" className="sidebar-link">
+            <Icon>
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </Icon>
+            <span>Login</span>
+          </NavLink>
+        )}
+      </div>
 
       <p className="sidebar-footer">National University of Singapore</p>
     </aside>
